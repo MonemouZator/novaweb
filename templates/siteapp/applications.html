@@ -1,0 +1,72 @@
+{% extends "siteapp/base.html" %}
+{% load static %}
+{% block title %}Mes Applications | NovaWeb{% endblock %}
+
+{% block content %}
+<section class="text-center mb-5">
+    <h2 class="fw-bold">Nos Applications</h2>
+    <p>Découvrez nos solutions numériques innovantes.</p>
+</section>
+
+<div class="row g-4">
+    {% for app in apps %}
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card h-100 shadow-sm border-0">
+            
+            <!-- Vidéo ou fallback -->
+            {% if app.video %}
+                <video class="card-img-top" controls style="height: 220px; object-fit: cover; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;">
+                    <source src="{{ app.video.url }}" type="video/mp4">
+                    Votre navigateur ne supporte pas la lecture de vidéos.
+                </video>
+            {% else %}
+                <img src="{% static 'siteapp/img/default-app.jpg' %}" class="card-img-top" alt="{{ app.nom }}" style="height: 220px; object-fit: cover;">
+            {% endif %}
+
+            <div class="card-body text-center d-flex flex-column">
+                <h5 class="card-title fw-bold">{{ app.nom }}</h5>
+                <p class="card-text text-muted">{{ app.description_courte|truncatewords:20 }}</p>
+                <div class="mt-auto">
+                    {% if app.lien_demo %}
+                        <a href="{{ app.lien_demo }}" class="btn btn-outline-primary btn-sm px-4" target="_blank">Voir la démo</a>
+                    {% else %}
+                        <a href="{% url 'contact' %}?app_id={{ app.id }}" class="btn btn-success btn-sm px-4">Intéressé ? Contactez-nous</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center">Aucune application disponible pour le moment.</p>
+    {% endfor %}
+</div>
+
+<style>
+/* Hover effect sur les cartes */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Textes et boutons */
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+.card-text {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+.btn-outline-primary {
+    border-width: 2px;
+    font-weight: 500;
+}
+
+/* Responsive vidéo */
+video {
+    width: 100%;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+</style>
+{% endblock %}

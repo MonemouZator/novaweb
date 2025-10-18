@@ -1,0 +1,61 @@
+{% extends "siteapp/base.html" %}
+{% load static %}
+
+{% block title %}Contact | NovaWeb{% endblock %}
+
+{% block content %}
+<section class="text-center mb-5">
+    <h2 class="fw-bold">Contact & Inscription</h2>
+    <p>Vous souhaitez suivre une formation ou en savoir plus ? Écrivez-nous !</p>
+</section>
+
+<div class="row">
+    <!-- Formulaire -->
+    <div class="col-md-6 mb-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            <!-- Champs visibles -->
+            <div class="mb-3">
+                {{ form.nom.label_tag }}
+                {{ form.nom }}
+            </div>
+            <div class="mb-3">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div>
+            <div class="mb-3">
+                {{ form.sujet.label_tag }}
+                {{ form.sujet }}
+            </div>
+            <div class="mb-3">
+                {{ form.message.label_tag }}
+                {{ form.message }}
+            </div>
+
+            <!-- Champs invisibles -->
+            {{ form.application_interet }}
+            {{ form.formation_interet }}
+
+            <button type="submit" class="btn btn-primary w-100">Envoyer</button>
+        </form>
+    </div>
+
+    <!-- Coordonnées -->
+    <div class="col-md-6 mb-4">
+        <h5 class="fw-bold">Nos coordonnées</h5>
+        <p><strong>Adresse :</strong> Conakry, Guinée</p>
+        <p><strong>Téléphone :</strong> +224 62 00 00 00</p>
+        <p><strong>Email :</strong> contact@novaweb.gn</p>
+        <p><strong>Horaires :</strong> Lun - Sam : 8h - 18h</p>
+
+        <iframe src="https://maps.google.com/maps?q=Conakry&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                width="100%" height="250" style="border-radius:10px;" allowfullscreen></iframe>
+    </div>
+</div>
+{% endblock %}

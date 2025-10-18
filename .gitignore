@@ -1,0 +1,15 @@
+# Ignorer l'environnement virtuel
+venv/
+
+# Ignorer la base de données locale
+db.sqlite3
+
+# Ignorer le dossier cloné
+NovaWeb2/
+
+# Ignorer fichiers Python temporaires
+*.pyc
+__pycache__/
+
+# Ignorer médias téléchargés (optionnel)
+media/

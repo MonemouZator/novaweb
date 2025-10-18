@@ -1,0 +1,63 @@
+{% extends "siteapp/base.html" %}
+{% load static %}
+{% block title %}Ajouter un témoignage | NovaWeb{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4 text-center">Laissez votre témoignage</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form action="{% url 'ajouter_temoignage' %}" method="post" enctype="multipart/form-data" class="row g-3">
+        {% csrf_token %}
+
+        <div class="col-md-6">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" name="nom" id="nom" class="form-control" placeholder="Votre nom" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="fonction" class="form-label">Fonction / Poste</label>
+            <input type="text" name="fonction" id="fonction" class="form-control" placeholder="Votre poste/fonction">
+        </div>
+
+        <div class="col-12">
+            <label for="message" class="form-label">Votre témoignage</label>
+            <textarea name="message" id="message" class="form-control" rows="4" placeholder="Votre témoignage..." required></textarea>
+        </div>
+
+        <div class="col-md-6">
+            <label for="photo" class="form-label">Photo (optionnelle)</label>
+            <input type="file" name="photo" id="photo" class="form-control">
+        </div>
+
+        <div class="col-md-6">
+            <label for="formation" class="form-label">Formation suivie</label>
+            <select name="formation" id="formation" class="form-select">
+                <option value="">-- Sélectionnez --</option>
+                {% for f in fomas %}
+                    <option value="{{ f.id }}">{{ f.titre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="application" class="form-label">Application utilisée</label>
+            <select name="application" id="application" class="form-select">
+                <option value="">-- Sélectionnez --</option>
+                {% for a in apps %}
+                    <option value="{{ a.id }}">{{ a.nom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-12 text-center mt-3">
+            <button type="submit" class="btn btn-primary btn-lg">Envoyer mon témoignage</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "siteapp/base.html" %}
+{% load static %}
+
+{% block title %}Cours en ligne | NovaWeb{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4 text-center">Cours en ligne</h2>
+
+    <!-- Filtrage par catégorie -->
+    <form method="get" class="mb-4 text-center">
+        <select name="categorie" class="form-select w-auto d-inline">
+            <option value="">Toutes les catégories</option>
+            {% for cat in categories %}
+                <option value="{{ cat.id }}" {% if request.GET.categorie == cat.id|stringformat:"s" %}selected{% endif %}>
+                    {{ cat.nom }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-secondary">Filtrer</button>
+    </form>
+
+    <!-- Liste des cours responsive -->
+    <div class="row g-4">
+        {% for c in cours %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="card h-100 shadow-sm d-flex flex-column">
+                
+                <!-- Vidéo ou image -->
+                {% if c.video %}
+                    <video width="100%" controls class="card-img-top">
+                        <source src="{{ c.video.url }}" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                {% else %}
+                    <img src="{% static 'siteapp/img/default-course.jpg' %}" class="card-img-top" alt="Cours">
+                {% endif %}
+
+                <!-- Corps de la carte -->
+                <div class="card-body d-flex flex-column">
+                    <!-- Titre du cours -->
+                    <h5 class="card-title text-center">{{ c.titre }}</h5>
+
+                    <!-- Description -->
+                    <p class="card-text">{{ c.description|truncatewords:20 }}</p>
+
+                    {% if c.categorie %}
+                        <p class="text-muted"><small>Catégorie : {{ c.categorie.nom }}</small></p>
+                    {% endif %}
+
+                    <!-- Boutons -->
+                    <div class="mt-auto text-center">
+                        {% if c.pdf %}
+                            <a href="{{ c.pdf.url }}" target="_blank" class="btn btn-primary btn-sm">Télécharger PDF</a>
+                        {% endif %}
+                        {% if c.video %}
+                            <a href="{{ c.video.url }}" target="_blank" class="btn btn-outline-secondary btn-sm">Voir vidéo</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+            <p class="text-center">Aucun cours disponible pour le moment.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .card {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+{% endblock %}
