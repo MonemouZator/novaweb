@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # === PAGE APPLICATIONS ===
 class Application(models.Model):
@@ -8,7 +9,7 @@ class Application(models.Model):
     technologies = models.CharField(max_length=200, help_text="Ex: Django, React, Flutter")
     # On remplace image par video (optionnel: garder image pour fallback)
     video = models.FileField(upload_to="applications/videos/", blank=True, null=True)
-    image = models.ImageField(upload_to="applications/", blank=True, null=True)  # optionnel
+    image = CloudinaryField('image', blank=True, null=True, overwrite=True)
     lien_demo = models.URLField(blank=True, null=True)
     date_publication = models.DateTimeField(auto_now_add=True)
 
@@ -36,7 +37,7 @@ class Formation(models.Model):
     description = models.TextField()
     duree = models.CharField(max_length=100)
     tarif = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to="formations/", blank=True, null=True)
+    image = CloudinaryField('image', blank=True, null=True, overwrite=True)
     date_debut = models.DateField(blank=True, null=True)
 
     def __str__(self):
@@ -77,7 +78,7 @@ class Temoignage(models.Model):
 class Equipe(models.Model):
     nom = models.CharField(max_length=100)
     poste = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to="equipe/", blank=True, null=True)
+    photo = CloudinaryField('image', blank=True, null=True, overwrite=True)
     description = models.TextField(blank=True)
 
     def __str__(self):
@@ -91,7 +92,7 @@ class Equipe(models.Model):
 
 class Partenaire(models.Model):
     nom = models.CharField(max_length=100)
-    logo = models.ImageField(upload_to="partenaires/", blank=True, null=True)
+    logo = CloudinaryField('LOGO', blank=True, null=True, overwrite=True)
     site_web = models.URLField(blank=True, null=True)
 
     def __str__(self):
@@ -154,7 +155,7 @@ class Cours(models.Model):
 
 class APropos(models.Model):
     nom = models.CharField(max_length=100, default="Mon Nom")
-    photo = models.ImageField(upload_to="apropos/", blank=True, null=True)
+    photo = CloudinaryField('image', blank=True, null=True, overwrite=True)
     biographie = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     video = models.FileField(upload_to="videos/biographie/", blank=True, null=True)
