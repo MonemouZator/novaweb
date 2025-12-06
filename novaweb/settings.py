@@ -10,13 +10,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # --------------------------------------------------
 # SECRET KEY & DEBUG
 # --------------------------------------------------
-SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+from decouple import config
+import dj_database_url
+from pathlib import Path
 
-# --------------------------------------------------
-# ALLOWED HOSTS
-# --------------------------------------------------
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*').split(',')
 
 # --------------------------------------------------
 # APPLICATIONS
@@ -72,9 +74,10 @@ TEMPLATES = [
 # --------------------------------------------------
 # DATABASE
 # --------------------------------------------------
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL')
+        default=config('DATABASE_URL')
     )
 }
 
