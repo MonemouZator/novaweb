@@ -11,7 +11,7 @@
 <!-- ==================== Nos Experts ==================== -->
 <section class="expert py-5" id="expert">
     <div class="col50 text-center mb-4" data-aos="fade-up">
-        <h2 class="titre">Nos <span>E</span>xperts</h2>
+        <h2 class="titre">Nos <span style="color:#FFD700;">E</span>xperts</h2>
         <p>Découvrez nos experts passionnés, prêts à partager leurs compétences et à vous accompagner dans vos projets numériques.</p>
     </div>
 
@@ -37,7 +37,7 @@
 <!-- ==================== Nos Services ==================== -->
 <section class="services py-5 bg-light">
     <div class="container text-center">
-        <h3 class="fw-bold mb-5" data-aos="fade-up">Nos Services</h3>
+        <h3 class="fw-bold mb-5" data-aos="fade-up">Nos <span style="color:#FFD700;">S</span>ervices</h3>
         <div class="row justify-content-center g-4">
             {% for service in services %}
             <div class="col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:'100' }}">
@@ -58,7 +58,7 @@
 
 <!-- ==================== Nos Formations ==================== -->
 <section class="formations py-5 text-center">
-    <h3 class="fw-bold mb-4" data-aos="fade-up">Nos Formations</h3>
+    <h3 class="fw-bold mb-4" data-aos="fade-up">Nos <span style="color:#FFD700;">F</span>ormations</h3>
     <div class="row g-4 justify-content-center">
         {% for formation in formations %}
         <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'100' }}">
@@ -87,7 +87,7 @@
 
 <!-- ==================== Nos Applications ==================== -->
 <section class="applications py-5 text-center">
-    <h3 class="fw-bold mb-4" data-aos="fade-up">Nos Applications</h3>
+    <h3 class="fw-bold mb-4" data-aos="fade-up">Nos <span style="color:#FFD700;">A</span>pplications</h3>
     <p data-aos="fade-up">Découvrez nos solutions numériques innovantes.</p>
     <div class="row g-4 justify-content-center">
         {% for app in applications %}
@@ -106,7 +106,7 @@
                         {% if app.lien_demo %}
                         <a href="{{ app.lien_demo }}" class="btn btn-outline-primary btn-sm px-4" target="_blank">Voir la démo</a>
                         {% else %}
-                        <a href="{% url 'contact' %}?app_id={{ app.id }}" class="btn btn-success btn-sm px-4">Intéressé ? Contactez-nous</a>
+                        <a href="{% url 'contact' %}?app_id={{ app.id }}" class="btn btn-primary btn-sm px-4">Intéressé ? Contactez-nous</a>
                         {% endif %}
                     </div>
                 </div>
@@ -120,7 +120,8 @@
 
 <!-- ==================== Témoignages ==================== -->
 <section class="temoignages py-5 text-center">
-    <h3 class="fw-bold mb-4" data-aos="fade-up">Témoignages</h3>
+
+    <h3 class="fw-bold mb-4" data-aos="fade-up"> <span style="color:#FFD700;">T</span>émoignages de nos clients</h3><br>
     <div class="row justify-content-center g-4">
         {% for temoignage in temoignages %}
         <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'100' }}">

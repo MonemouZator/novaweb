@@ -27,3 +27,4 @@ class CoursAdmin(admin.ModelAdmin):
     list_display = ('titre', 'categorie', 'date_creation')
     list_filter = ('categorie',)
     search_fields = ('titre', 'description')
+

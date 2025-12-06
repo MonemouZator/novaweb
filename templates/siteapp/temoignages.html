@@ -5,8 +5,13 @@
 
 {% block content %}
 <section class="text-center mb-5">
-    <h2 class="fw-bold">Témoignages de nos clients</h2>
+    <h2 class="fw-bold"><span style="color:#FFD700;">T</span>émoignages de nos clients</h2>
     <p>Ils ont suivi nos formations ou utilisé nos applications</p>
+    <div class="text-center mt-4">
+    <a href="{% url 'ajou' %}" class="btn btn-primary">
+        <i class="fa fa-comment"></i> Laisser un témoignage
+    </a>
+</div>
 </section>
 
 <div class="row justify-content-center">
@@ -35,11 +40,7 @@
     {% endfor %}
 </div>
 
-<div class="text-center mt-4">
-    <a href="{% url 'ajou' %}" class="btn btn-primary">
-        <i class="fa fa-comment"></i> Laisser un témoignage
-    </a>
-</div>
+
 
 <style>
 /* Carte témoignage moderne */
