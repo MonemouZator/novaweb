@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cloudinary',
-    'django_cloudinary_storage',  # utilisation recommandée
+    'cloudinary_storage',
+    'django_cloudinary_storage',
     'nova',  # ton app
 ]
 
