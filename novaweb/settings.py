@@ -1,7 +1,10 @@
 import os
 from pathlib import Path
 import dj_database_url
-from decouple import config  # pour lire le .env
+from decouple import config
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # --------------------------------------------------
 # BASE DIRECTORY
@@ -12,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET KEY & DEBUG
 # --------------------------------------------------
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost,novaweb-vrhy.onrender.com').split(',')
 
 # --------------------------------------------------
@@ -27,8 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'cloudinary_storage',
-    'django_cloudinary_storage',
-    'nova',  # ton app
+    'nova',  # ton application
 ]
 
 # --------------------------------------------------
@@ -89,7 +91,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # --------------------------------------------------
 # INTERNATIONALIZATION
 # --------------------------------------------------
-LANGUAGE_CODE = 'fr'
+LANGUAGE_CODE = 'fr-fr'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
@@ -110,7 +112,14 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': config('CLOUDINARY_API_SECRET'),
 }
 
-DEFAULT_FILE_STORAGE = 'django_cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# Configuration globale Cloudinary
+cloudinary.config(
+    cloud_name=config('CLOUDINARY_CLOUD_NAME'),
+    api_key=config('CLOUDINARY_API_KEY'),
+    api_secret=config('CLOUDINARY_API_SECRET')
+)
 
 # --------------------------------------------------
 # EMAIL CONFIGURATION
