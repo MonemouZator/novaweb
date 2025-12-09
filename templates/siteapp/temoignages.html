@@ -3,33 +3,43 @@
 
 {% block title %}Témoignages | NovaWeb{% endblock %}
 
-{% block content %}
-<section class="text-center mb-5">
-    <h2 class="fw-bold"><span style="color:#FFD700;">T</span>émoignages de nos clients</h2>
-    <p>Ils ont suivi nos formations ou utilisé nos applications</p>
-    <div class="text-center mt-4">
-    <a href="{% url 'ajou' %}" class="btn btn-primary">
-        <i class="fa fa-comment"></i> Laisser un témoignage
-    </a>
-</div>
-</section>
+{% block hero %}
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content text-center">
+        <h1>Témoignages de nos clients</h1>
+        <p>Ils ont suivi nos formations ou utilisé nos applications</p>
 
+        {% comment %}
+        Vérifie que la route "ajou" existe dans urls.py, sinon change le nom !
+        Exemple :
+        path('temoignages/ajouter/', views.ajout_temoignage, name='ajou'),
+        {% endcomment %}
+
+        <a href="{% url 'ajou' %}" class="btn btn-warning mt-3">
+            <i class="fa fa-comment"></i> Laisser un témoignage
+        </a>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
 <div class="row justify-content-center">
     {% for temoignage in temoignages %}
     <div class="col-md-4 mb-4">
         <div class="card h-100 shadow-sm p-4 position-relative temoignage-card">
 
-            <!-- Pastille nom + photo -->
             {% if temoignage.nom %}
             <div class="name-badge d-flex align-items-center justify-content-center">
                 {% if temoignage.photo %}
                     <img src="{{ temoignage.photo.url }}" class="rounded-circle me-2">
+                {% else %}
+                    <img src="{% static 'siteapp/img/default-person.jpg' %}" class="rounded-circle me-2">
                 {% endif %}
                 <span>{{ temoignage.nom }}</span>
             </div>
             {% endif %}
 
-            <!-- Texte témoignage -->
             <blockquote class="blockquote mt-5 mb-0 text-center">
                 <p class="fst-italic">"{{ temoignage.message }}"</p>
             </blockquote>
@@ -40,22 +50,17 @@
     {% endfor %}
 </div>
 
-
-
 <style>
-/* Carte témoignage moderne */
 .temoignage-card {
     background: #f0f4f8;
     border-radius: 15px;
-    padding-top: 70px; /* espace pour la pastille */
+    padding-top: 70px;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 .temoignage-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
-
-/* Pastille nom + photo */
 .name-badge {
     position: absolute;
     top: -20px;
@@ -69,16 +74,12 @@
     box-shadow: 0 3px 8px rgba(0,0,0,0.2);
     font-size: 1rem;
 }
-
-/* Image dans pastille */
 .name-badge img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
 }
-
-/* Texte du témoignage */
 .temoignage-card blockquote p {
     color: #1F618D;
     font-size: 0.95rem;

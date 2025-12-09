@@ -3,18 +3,25 @@
 
 {% block title %}Accueil | NovaWeb{% endblock %}
 
+{% block hero %}
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content text-center">
+        <h1>Bienvenue sur <span style="color:#FFD700;">NovaWeb</span> !</h1>
+        <p>Des formations pratiques, des projets concrets et un accompagnement personnalisé pour révéler votre potentiel.</p>
+        <a href="{% url 'formations' %}" class="btn btn-warning btn-lg mt-3">Découvrir nos formations</a>
+    </div>
+</section>
+{% endblock %}
+
 {% block content %}
 
-<!-- ==================== Hero principal ==================== -->
-
-
-<!-- ==================== Nos Experts ==================== -->
+<!-- Experts -->
 <section class="expert py-5" id="expert">
     <div class="col50 text-center mb-4" data-aos="fade-up">
         <h2 class="titre">Nos <span style="color:#FFD700;">E</span>xperts</h2>
-        <p>Découvrez nos experts passionnés, prêts à partager leurs compétences et à vous accompagner dans vos projets numériques.</p>
+        <p>Découvrez nos experts passionnés, prêts à vous accompagner dans vos projets numériques.</p>
     </div>
-
     <div class="contenu row justify-content-center g-4">
         {% for membre in equipes %}
         <div class="box col-lg-3 col-md-4 col-sm-6 text-center" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'100' }}">
@@ -34,7 +41,7 @@
     </div>
 </section>
 
-<!-- ==================== Nos Services ==================== -->
+<!-- Services -->
 <section class="services py-5 bg-light">
     <div class="container text-center">
         <h3 class="fw-bold mb-5" data-aos="fade-up">Nos <span style="color:#FFD700;">S</span>ervices</h3>
@@ -56,7 +63,7 @@
     </div>
 </section>
 
-<!-- ==================== Nos Formations ==================== -->
+<!-- Formations -->
 <section class="formations py-5 text-center">
     <h3 class="fw-bold mb-4" data-aos="fade-up">Nos <span style="color:#FFD700;">F</span>ormations</h3>
     <div class="row g-4 justify-content-center">
@@ -85,10 +92,9 @@
     </div>
 </section>
 
-<!-- ==================== Nos Applications ==================== -->
+<!-- Applications -->
 <section class="applications py-5 text-center">
     <h3 class="fw-bold mb-4" data-aos="fade-up">Nos <span style="color:#FFD700;">A</span>pplications</h3>
-    <p data-aos="fade-up">Découvrez nos solutions numériques innovantes.</p>
     <div class="row g-4 justify-content-center">
         {% for app in applications %}
         <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'100' }}">
@@ -118,10 +124,9 @@
     </div>
 </section>
 
-<!-- ==================== Témoignages ==================== -->
+<!-- Témoignages -->
 <section class="temoignages py-5 text-center">
-
-    <h3 class="fw-bold mb-4" data-aos="fade-up"> <span style="color:#FFD700;">T</span>émoignages de nos clients</h3><br>
+    <h3 class="fw-bold mb-4" data-aos="fade-up"> <span style="color:#FFD700;">T</span>émoignages de nos clients</h3>
     <div class="row justify-content-center g-4">
         {% for temoignage in temoignages %}
         <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'100' }}">
@@ -129,7 +134,7 @@
                 {% if temoignage.nom %}
                 <div class="name-badge d-flex align-items-center justify-content-center">
                     {% if temoignage.photo %}
-                    <img src="{{ temoignage.photo.url }}" class="rounded-circle me-2">
+                    <img src="{{ temoignage.photo.url }}" class="rounded-circle me-2" alt="{{ temoignage.nom }}">
                     {% endif %}
                     <span>{{ temoignage.nom }}</span>
                 </div>
@@ -144,40 +149,5 @@
         {% endfor %}
     </div>
 </section>
-
-<!-- ==================== Styles supplémentaires ==================== -->
-<style>
-/* Expert */
-.expert .box:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-.expert .text h3 { font-size: 1.2rem; font-weight:600; margin-top:0.5rem; }
-.expert .text p { font-size:0.9rem; color:#555; }
-
-/* Services */
-.service-card { background:#fff; border-radius:15px; transition:0.3s; }
-.service-card:hover { transform: translateY(-8px); box-shadow:0 12px 25px rgba(0,0,0,0.15); }
-.service-icon { width:70px; height:70px; display:flex; align-items:center; justify-content:center; margin:0 auto; background:#eaf2fb; border-radius:50%; }
-.services h3 { color:#1F618D; }
-.services h5 { color:#2E86C1; }
-.services p { font-size:0.95rem; line-height:1.5; }
-
-/* Applications */
-.applications .card:hover { transform: translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.15); transition:0.3s; }
-.applications .card-title { font-size:1.25rem; margin-bottom:0.75rem; }
-.applications .card-text { font-size:0.95rem; margin-bottom:1rem; }
-.applications video { width:100%; border-radius:0.5rem 0.5rem 0 0; }
-
-/* Témoignages */
-.temoignage-card { background:#f0f4f8; border-radius:15px; padding-top:70px; transition:0.3s; }
-.temoignage-card:hover { transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,0.15); }
-.name-badge { position:absolute; top:-20px; left:50%; transform:translateX(-50%); background:#2E86C1; color:#fff; font-weight:600; padding:8px 16px; border-radius:50px; box-shadow:0 3px 8px rgba(0,0,0,0.2); font-size:1rem; }
-.name-badge img { width:40px; height:40px; border-radius:50%; object-fit:cover; }
-</style>
-
-<!-- ==================== AOS Animation ==================== -->
-<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({ duration:1000, once:true });
-</script>
 
 {% endblock %}

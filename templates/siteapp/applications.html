@@ -1,19 +1,23 @@
 {% extends "siteapp/base.html" %}
 {% load static %}
-{% block title %}Mes Applications | NovaWeb{% endblock %}
+
+{% block title %}Applications | NovaWeb{% endblock %}
+
+{% block hero %}
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content text-center">
+        <h1>Nos <span style="color:#FFD700;">A</span>pplications</h1>
+        <p>Découvrez nos solutions numériques innovantes</p>
+    </div>
+</section>
+{% endblock %}
 
 {% block content %}
-<section class="text-center mb-5">
-    <h2 class="fw-bold">Nos <span style="color:#FFD700;">A</span>pplications</h2>
-    <p>Découvrez nos solutions numériques innovantes.</p>
-</section>
-
 <div class="row g-4">
     {% for app in apps %}
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card h-100 shadow-sm border-0">
-            
-            <!-- Vidéo ou fallback -->
             {% if app.video %}
                 <video class="card-img-top" controls style="height: 220px; object-fit: cover; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;">
                     <source src="{{ app.video.url }}" type="video/mp4">
@@ -42,31 +46,10 @@
 </div>
 
 <style>
-/* Hover effect sur les cartes */
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    transition: all 0.3s ease-in-out;
-}
-
-/* Textes et boutons */
-.card-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-}
-.card-text {
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-}
-.btn-outline-primary {
-    border-width: 2px;
-    font-weight: 500;
-}
-
-/* Responsive vidéo */
-video {
-    width: 100%;
-    border-radius: 0.5rem 0.5rem 0 0;
-}
+.card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); transition: all 0.3s ease-in-out; }
+.card-title { font-size: 1.25rem; margin-bottom: 0.75rem; }
+.card-text { font-size: 0.95rem; margin-bottom: 1rem; }
+.btn-outline-primary { border-width: 2px; font-weight: 500; }
+video { width: 100%; border-radius: 0.5rem 0.5rem 0 0; }
 </style>
 {% endblock %}

@@ -1,13 +1,18 @@
 {% extends "siteapp/base.html" %}
-{% load static %}
+
 {% block title %}Formations | NovaWeb{% endblock %}
 
-{% block content %}
-<section class="text-center mb-5">
-    <h2 class="fw-bold">Nos <span style="color:#FFD700;">F</span>ormations</h2>
-    <p>Des parcours complets pour devenir un expert du numérique</p>
+{% block hero %}
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content text-center">
+        <h1>Nos <span style="color:#FFD700;">F</span>ormations</h1>
+        <p>Des parcours complets pour devenir un expert du numérique</p>
+    </div>
 </section>
+{% endblock %}
 
+{% block content %}
 <div class="row g-4">
     {% for formation in formations %}
     <div class="col-md-4 mb-4">
@@ -34,7 +39,6 @@
 </div>
 
 <style>
-/* Carte formation moderne */
 .formation-card {
     border-radius: 15px;
     overflow: hidden;
@@ -45,30 +49,10 @@
     transform: translateY(-8px);
     box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 }
-
-/* Image uniforme */
-.formation-img {
-    height: 200px;
-    object-fit: cover;
-}
-
-/* Titre et description */
-.card-title {
-    color: #1F618D;
-    margin-bottom: 10px;
-}
-.card-body p {
-    color: #34495E;
-}
-
-/* Bouton stylé */
-.btn-primary {
-    background-color: #2E86C1;
-    border: none;
-    transition: 0.3s;
-}
-.btn-primary:hover {
-    background-color: #1F618D;
-}
+.formation-img { height: 200px; object-fit: cover; }
+.card-title { color: #1F618D; margin-bottom: 10px; }
+.card-body p { color: #34495E; }
+.btn-primary { background-color: #2E86C1; border: none; transition: 0.3s; }
+.btn-primary:hover { background-color: #1F618D; }
 </style>
 {% endblock %}

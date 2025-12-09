@@ -5,80 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}NovaWeb{% endblock %}</title>
-
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- CSS personnalisé -->
     <link rel="stylesheet" href="{% static 'siteapp/css/style.css' %}">
-
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'siteapp/images/favicon.png' %}">
+    
     <style>
         body { font-family: 'Open Sans', sans-serif; background-color: #F4F6F7; color: #1F618D; }
         h1,h2,h3,h4,h5,h6 { font-family: 'Poppins', sans-serif; color: #1F618D; }
-
-        /* Navbar */
         .navbar { background-color: #1F618D !important; }
-        .navbar-brand { font-weight: 700; color: #FFD700}
+        .navbar-brand { font-weight: 700; color: #FFD700 !important;}
         .navbar-nav .nav-link { color: #F8F9FA !important; font-weight: 500; transition: 0.3s; }
         .navbar-nav .nav-link:hover { color: #FFD700 !important; }
-
-        /* Boutons */
         .btn-primary { background-color: #2E86C1; border: none; transition: 0.3s; }
         .btn-primary:hover { background-color: #1F618D; }
         .btn-warning { background-color: #FFD700; color: #1F618D; font-weight: 600; border: none; }
         .btn-warning:hover { background-color: #F1C40F; color: #fff; }
-
-        /* Hero / Affiche */
-        .hero-section {
-            position: relative;
-            height: 420px;
-            background: url("{% static 'siteapp/images/hero-formation.jpg' %}") center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-content h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: #f8f9fa;
-        }
-
-        /* Cards et contenu */
         .card { border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-
-        /* Footer */
         footer { background-color: #1F618D; color: white; text-align: center; padding: 20px 0; margin-top: 50px; }
-
         video { width: 100%; border-radius: 8px; }
     </style>
 </head>
 <body>
+
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold" href="{% url 'accueil' %}">NovaWeb</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -89,7 +42,6 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'accueil' %}">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'formations' %}">Formations</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'applications' %}">Applications</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'liste_cours' %}">Cours en ligne</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'apropos' %}">À propos</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'temoignages' %}">Témoignages</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
@@ -98,22 +50,12 @@
         </div>
     </nav>
 
-    <!-- Affiche principale -->
-    <section class="hero-section">
-        <div class="hero-overlay"></div>
-         
-        <div class="hero-content">
-            <h1>BIENVENUE ! <span style="color:#FFD700;"></span></h1>
-            <h1>Apprenez, Créez et Innovez avec <span style="color:#FFD700;">NovaWeb</span></h1>
-            <p>Des formations pratiques, des projets concrets et un accompagnement personnalisé pour révéler votre potentiel.</p>
-            <a href="{% url 'formations' %}" class="btn btn-warning btn-lg mt-3">Découvrir nos formations</a>
-        </div>
-    </section>
+    <!-- Hero spécifique par page -->
+    {% block hero %}{% endblock %}
 
     <!-- Contenu principal -->
     <main class="container mt-5 mb-5">
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
 
     <!-- Footer -->
@@ -121,7 +63,10 @@
         <p class="mb-0">&copy; 2025 NovaWeb — Tous droits réservés</p>
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 800, once: true });
+    </script>
 </body>
 </html>
